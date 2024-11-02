@@ -1,0 +1,19 @@
+.seoFooter {
+    background: #1a1a2e;
+    color: #ffffff;
+    padding: 3rem 1rem;
+    margin-top: auto;
+  }
+  
+  .seoGridContainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  
+  .seoSection {
+    padding: 0 1rem;
+  }

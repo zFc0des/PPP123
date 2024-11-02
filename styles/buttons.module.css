@@ -1,0 +1,145 @@
+/* styles/buttons.module.css */
+.promotionButton {
+    width: 100%;
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    background: linear-gradient(135deg, #0070f3, #0055b3);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.875rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .promotionButton:hover {
+    background: linear-gradient(135deg, #0055b3, #003d80);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .viewMoreButton {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid #0070f3;
+    color: #0070f3;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .viewMoreButton:hover {
+    background: rgba(0, 112, 243, 0.1);
+  }
+  
+  .visitButton {
+    background: #0070f3;
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.2s;
+    flex: 1;
+    cursor: pointer;
+  }
+  
+  .visitButton:hover {
+    background: #0051b3;
+  }
+  
+  .filterButton {
+    padding: 0.5rem 1rem;
+    background: #f0f4f8;
+    border: 1px solid #e1e7ef;
+    color: #4a5568;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .filterButton:hover {
+    background: #e1e7ef;
+  }
+  
+  .filterButton.active {
+    background: #0070f3;
+    color: white;
+    border-color: #0070f3;
+  }
+  
+  /* Secondary button style */
+  .secondaryButton {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 1px solid #718096;
+    color: #718096;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .secondaryButton:hover {
+    background: #f7fafc;
+    border-color: #4a5568;
+    color: #4a5568;
+  }
+  
+  /* Outline button style */
+  .outlineButton {
+    padding: 0.5rem 1rem;
+    background: transparent;
+    border: 2px solid #0070f3;
+    color: #0070f3;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .outlineButton:hover {
+    background: rgba(0, 112, 243, 0.1);
+  }
+  
+  /* Small button variant */
+  .small {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+  }
+  
+  /* Large button variant */
+  .large {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  /* Disabled state */
+  .promotionButton:disabled,
+  .viewMoreButton:disabled,
+  .visitButton:disabled,
+  .filterButton:disabled,
+  .secondaryButton:disabled,
+  .outlineButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  @media (max-width: 768px) {
+    .promotionButton,
+    .visitButton,
+    .viewMoreButton,
+    .filterButton,
+    .secondaryButton,
+    .outlineButton {
+      padding: 0.5rem 1rem;
+      font-size: 0.8125rem;
+    }
+  }
