@@ -1,0 +1,189 @@
+/* styles/promotions.module.css */
+.promotionsContainer {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    background: #f5f7fb;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+  
+  .promotionsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+  }
+  
+  .promotionCard {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #e1e7ef;
+  }
+  
+  .promotionCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .casinoTitle {
+    padding: 1rem;
+    border-bottom: 1px solid #e1e7ef;
+  }
+  
+  .casinoTitle h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #2d3748;
+  }
+  
+  .cardContent {
+    padding: 1rem;
+  }
+  
+  .logoSection {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    border-radius: 8px;
+    padding: 0.5rem;
+  }
+  
+  .casinoLogo {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .vipBadge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: #3182ce;
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+  }
+  
+  .bonusInfo {
+    margin-bottom: 1.5rem;
+  }
+  
+  .bonusSection {
+    margin-bottom: 1rem;
+  }
+  
+  .bonusSection h4 {
+    color: #4a5568;
+    font-size: 0.875rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+  
+  .bonusSection p {
+    color: #2d3748;
+    font-size: 0.875rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .requirements {
+    background: #f7fafc;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+  }
+  
+  .requirements h4 {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.875rem;
+    color: #4a5568;
+  }
+  
+  .requirementsList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .requirementItem {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.875rem;
+    color: #4a5568;
+  }
+  
+  .requirementLabel {
+    font-weight: 500;
+  }
+  
+  .requirementValue {
+    color: #2d3748;
+  }
+  
+  .cardActions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  
+  /* Update buttons.module.css for these styles */
+  .viewMoreButton {
+    width: 100%;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid #3182ce;
+    color: #3182ce;
+    border-radius: 4px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .signUpButton {
+    width: 100%;
+    padding: 0.75rem;
+    background: #3182ce;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .viewMoreButton:hover {
+    background: rgba(49, 130, 206, 0.1);
+  }
+  
+  .signUpButton:hover {
+    background: #2c5282;
+  }
+  
+  @media (max-width: 768px) {
+    .promotionsGrid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .promotionsGrid {
+      grid-template-columns: 1fr;
+    }
+    
+    .promotionCard {
+      margin-bottom: 1rem;
+    }
+  }

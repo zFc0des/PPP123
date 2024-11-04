@@ -1,11 +1,7 @@
-// pages/promotions.js
-import { useState } from 'react';
 import Layout from '../components/Layout';
 import PromotionCard from '../components/PromotionCard';
-import styles from '../styles/sections.module.css';
-import filterStyles from '../styles/filters.module.css';
-import typographyStyles from '../styles/typography.module.css';
 import casinoData from '../data/casinos.json';
+import { useState } from 'react';
 
 const Promotions = () => {
   const [filterType, setFilterType] = useState('all');
@@ -17,11 +13,9 @@ const Promotions = () => {
         const matchesType = filterType === 'all' || 
                           (casino.promotions && Object.values(casino.promotions)
                             .some(promo => promo.toLowerCase().includes(filterType)));
-                            
         const matchesSearch = casino.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
                             Object.values(casino.promotions).some(promo => 
                               promo.toLowerCase().includes(searchTerm.toLowerCase()));
-                              
         return matchesType && matchesSearch;
       })
       .sort((a, b) => a.name.localeCompare(b.name));
@@ -29,23 +23,23 @@ const Promotions = () => {
 
   return (
     <Layout>
-      <div className={styles.promotionsContainer}>
-        <div className={styles.pageHeader}>
-          <h1 className={typographyStyles.h2Styled}>Casino Promotions</h1>
-          <p>Find the best casino bonus offers and promotions</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Casino Promotions</h1>
+          <p className="mt-2 text-lg text-gray-600">Find the best casino bonus offers and promotions</p>
         </div>
 
-        <div className={filterStyles.filtersSection}>
-          <div className={filterStyles.filterGrid}>
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <input
               type="text"
               placeholder="Search casinos or promotions..."
-              className={filterStyles.searchInput}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               onChange={(e) => setSearchTerm(e.target.value)}
             />
             
             <select 
-              className={filterStyles.filterSelect}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               onChange={(e) => setFilterType(e.target.value)}
             >
               <option value="all">All Bonus Types</option>
@@ -56,16 +50,16 @@ const Promotions = () => {
           </div>
         </div>
 
-        <div className={styles.promotionsGrid}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filterPromotions().map((casino, index) => (
             <PromotionCard key={index} casino={casino} />
           ))}
         </div>
 
         {filterPromotions().length === 0 && (
-          <div className={styles.noResults}>
-            <h3>No promotions found</h3>
-            <p>Try adjusting your search or filter criteria</p>
+          <div className="text-center py-12">
+            <h3 className="text-lg font-medium text-gray-900">No promotions found</h3>
+            <p className="mt-2 text-gray-600">Try adjusting your search or filter criteria</p>
           </div>
         )}
       </div>
