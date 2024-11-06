@@ -1,98 +1,77 @@
 // components/ReviewCard.js
 import { useState } from 'react';
-import Image from 'next/image';
-import styles from '../styles/components.module.css'; // Component-specific styles
-import cardStyles from '../styles/cards.module.css'; // Card layout styles
-import buttonStyles from '../styles/buttons.module.css'; // Button styles
+import { Star, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import CasinoLogo from './ui/CasinoLogo';
+import ReferralLink from './ui/card/ReferralLink';
 
 const ReviewCard = ({ casino }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  
-  // Convert casino name to image filename format
   const logoSrc = `/images/logos/${casino.name.toLowerCase().replace(/\s+/g, '-')}.png`;
 
   return (
-    <div className={cardStyles.reviewCard}>
-      <div className={styles.reviewHeader}>
-        <div className={styles.reviewLogo}>
-          <Image
-            src={logoSrc}
-            alt={`${casino.name} logo`}
-            width={120}
-            height={60}
-            className={styles.casinoLogo}
+    <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      {/* Card Header */}
+      <div className="bg-gradient-to-r from-brand-blue to-brand-hover p-6">
+        <div className="flex justify-between items-center">
+          <h3 className="text-xl text-white font-semibold">{casino.name}</h3>
+          <div className="flex items-center gap-1 bg-white/10 px-3 py-1 rounded-full">
+            <Star className="h-4 w-4 text-yellow-400 fill-current" />
+            <span className="text-white text-sm">Top Rated</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Card Content */}
+      <div className="p-6 space-y-6">
+        {/* Casino Logo */}
+        <div className="w-32 h-16 mx-auto bg-white rounded-lg p-2 flex items-center justify-center border border-gray-200">
+          <CasinoLogo
+            casinoSlug={casino.slug}
+            width={32}  
+            height={32}
+            className="rounded-full object-cover"
           />
         </div>
-        {casino.vip_program && (
-          <span className={styles.vipBadge}>VIP Program</span>
-        )}
-      </div>
 
-      <div className={styles.quickStats}>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Min Redemption</span>
-          <span className={styles.statValue}>{casino.limits.min_sweeps_balance}</span>
-        </div>
-        <div className={styles.statItem}>
-          <span className={styles.statLabel}>Playthrough</span>
-          <span className={styles.statValue}>{casino.wager_requirements.sweeps_playthrough}</span>
-        </div>
-      </div>
+        {/* Key Features */}
+        <div className="space-y-4">
+          <div>
+            <h4 className="text-sm font-semibold text-gray-700 mb-2">Welcome Bonus</h4>
+            <p className="text-sm text-gray-600">{casino.promotions.sign_up_bonus}</p>
+          </div>
 
-      <div className={styles.reviewContent}>
-        <div className={styles.bonusSection}>
-          <h4>Available Bonuses</h4>
-          <ul className={styles.bonusList}>
-            {casino.promotions.sign_up_bonus && (
-              <li>
-                <span className={styles.bonusType}>Sign Up:</span>
-                <span className={styles.bonusValue}>{casino.promotions.sign_up_bonus}</span>
+          <div className="bg-gray-50 p-4 rounded-lg">
+            <h4 className="text-sm font-semibold text-gray-700 mb-3">Quick Info</h4>
+            <ul className="space-y-2">
+              <li className="flex justify-between text-sm">
+                <span className="text-gray-600 font-medium">Playthrough:</span>
+                <span className="text-gray-800">{casino.wager_requirements.sweeps_playthrough}</span>
               </li>
-            )}
-            {casino.promotions.daily_login_bonus && (
-              <li>
-                <span className={styles.bonusType}>Daily:</span>
-                <span className={styles.bonusValue}>{casino.promotions.daily_login_bonus}</span>
+              <li className="flex justify-between text-sm">
+                <span className="text-gray-600 font-medium">Min Balance:</span>
+                <span className="text-gray-800">{casino.limits.min_sweeps_balance}</span>
               </li>
-            )}
-            {casino.promotions.additional_bonus && (
-              <li>
-                <span className={styles.bonusType}>Additional:</span>
-                <span className={styles.bonusValue}>{casino.promotions.additional_bonus}</span>
-              </li>
-            )}
-          </ul>
+            </ul>
+          </div>
         </div>
 
-        <div className={styles.requirementsSection}>
-          <h4>Requirements & Limits</h4>
-          <ul>
-            <li>
-              <strong>Wagering:</strong> {casino.wager_requirements.sweeps_playthrough}
-            </li>
-            <li>
-              <strong>Min Balance:</strong> {casino.limits.min_sweeps_balance}
-            </li>
-            <li>
-              <strong>Restrictions:</strong> {casino.limits.regional_limitations}
-            </li>
-          </ul>
-        </div>
-      </div>
+        {/* Action Buttons */}
+        <div className="space-y-3 pt-4">
+          <ReferralLink
+            casino={casino}
+            className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+            trackingId={`review-${casino.slug}`}
+          >
+            Play Now
+          </ReferralLink>
 
-      <div className={styles.reviewActions}>
-        <button 
-          className={buttonStyles.viewMoreButton}
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
-          {isExpanded ? 'Show Less' : 'View Details'}
-        </button>
-        <button 
-          className={buttonStyles.visitButton}
-          onClick={() => window.open(casino.url, '_blank')}
-        >
-          Visit Casino
-        </button>
+          <Link
+            href={`/reviews/${casino.name.toLowerCase().replace(/\s+/g, '-')}`}
+            className="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg text-sm font-medium hover:border-gray-400 transition-colors text-center block"
+          >
+            Read Review
+          </Link>
+        </div>
       </div>
     </div>
   );

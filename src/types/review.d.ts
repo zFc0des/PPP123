@@ -1,102 +1,82 @@
-// src/lib/review-schema.js
+// src/types/review.d.ts
 
-export const reviewSchema = {
-    type: 'object',
-    required: [
-      'casino_name',
-      'url',
-      'content',
-      'last_updated',
-      'casino_details',
-      'ratings',
-      'pros_cons',
-      'keywords',
-      'review_sections',
-      'seo'
-    ],
-    properties: {
-      casino_name: { type: 'string' },
-      url: { type: 'string', format: 'uri' },
-      content: { type: 'string' },
-      last_updated: { type: 'string', format: 'date-time' },
-      review_date: { type: 'string', format: 'date' },
-      
-      casino_details: {
-        type: 'object',
-        required: ['name', 'type', 'launched', 'owner', 'licensed_by'],
-        properties: {
-          name: { type: 'string' },
-          type: { type: 'string' },
-          launched: { type: 'string' },
-          owner: { type: 'string' },
-          licensed_by: { type: 'string' },
-          available_countries: { type: 'array', items: { type: 'string' } },
-          restricted_states: { type: 'array', items: { type: 'string' } },
-          languages: { type: 'array', items: { type: 'string' } },
-          currencies: { type: 'array', items: { type: 'string' } }
-        }
-      },
-  
-      ratings: {
-        type: 'object',
-        required: ['overall'],
-        properties: {
-          overall: { type: 'number', minimum: 0, maximum: 5 },
-          game_variety: { type: 'number', minimum: 0, maximum: 5 },
-          user_experience: { type: 'number', minimum: 0, maximum: 5 },
-          bonuses: { type: 'number', minimum: 0, maximum: 5 },
-          support: { type: 'number', minimum: 0, maximum: 5 },
-          payment_options: { type: 'number', minimum: 0, maximum: 5 },
-          mobile_experience: { type: 'number', minimum: 0, maximum: 5 }
-        }
-      },
-  
-      pros_cons: {
-        type: 'object',
-        required: ['pros', 'cons'],
-        properties: {
-          pros: { type: 'array', items: { type: 'string' } },
-          cons: { type: 'array', items: { type: 'string' } }
-        }
-      },
-  
-      keywords: { type: 'array', items: { type: 'string' } },
-      
-      review_sections: { type: 'array', items: { type: 'string' } },
-  
-      seo: {
-        type: 'object',
-        required: ['title', 'meta_description', 'focus_keywords'],
-        properties: {
-          title: { type: 'string' },
-          meta_description: { type: 'string', maxLength: 160 },
-          focus_keywords: { type: 'array', items: { type: 'string' } },
-          schema_type: { type: 'string', enum: ['Review'] }
-        }
-      }
-    }
-  };
-  
-  // Helper function to validate review data
-  export function validateReviewData(data) {
-    // Note: You'll need to implement actual validation logic here
-    // You could use a library like 'ajv' for JSON Schema validation
-    return true;
-  }
-  
-  // Helper function to parse review content sections
-  export function parseReviewContent(content) {
-    const sections = content.split('**').filter(Boolean);
-    return sections.reduce((acc, section) => {
-      if (section.startsWith('H1:') || section.startsWith('H2:')) {
-        const [heading, ...contentParts] = section.split('\n');
-        const [level, ...titleParts] = heading.split(':');
-        acc.push({
-          level,
-          title: titleParts.join(':').trim(),
-          content: contentParts.join('\n').trim()
-        });
-      }
-      return acc;
-    }, []);
-  }
+interface Promotions {
+  sign_up_bonus: string;
+  daily_login_bonus?: string;
+  additional_bonus?: string;
+  first_purchase_bonus?: string;
+  special_event_bonus?: string;
+}
+
+interface WagerRequirements {
+  sweeps_playthrough: string;
+  max_sweeps_exchange?: string;
+  max_daily_redemption?: string;
+  max_redemption_limit?: string;
+  daily_play_limits?: string;
+}
+
+interface Limits {
+  min_sweeps_balance: string;
+  regional_limitations: string;
+}
+
+interface Ratings {
+  overall: number;
+  game_variety?: number;
+  user_experience?: number;
+  bonuses?: number;
+  support?: number;
+  mobile_experience?: number;
+}
+
+interface ProsCons {
+  pros: string[];
+  cons: string[];
+}
+
+interface ReviewSection {
+  level: 'H1' | 'H2';
+  title: string;
+  content: string;
+  id: string;
+}
+
+export interface CasinoReview {
+  name: string;
+  slug: string;
+  url: string;
+  referral_link?: string;
+  content: string;
+  meta_description: string;
+  last_updated: string;
+  promotions: Promotions;
+  wager_requirements: WagerRequirements;
+  limits: Limits;
+  ratings?: Ratings;
+  pros_cons?: ProsCons;
+  vip_program?: string;
+}
+
+export interface ParsedReviewContent {
+  mainContent: ReviewSection | undefined;
+  otherSections: ReviewSection[];
+}
+
+export interface ValidationResult {
+  valid: boolean;
+  errors: null | Array<{
+    keyword: string;
+    dataPath: string;
+    schemaPath: string;
+    params: any;
+    message: string;
+  }>;
+}
+
+export interface ReferralEvent {
+  casino_name: string;
+  link_type: 'referral' | 'direct';
+  source: string;
+  timestamp: string;
+}

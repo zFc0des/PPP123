@@ -1,7 +1,9 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import { ChevronRight, Star, Shield, Gamepad2, Headphones } from 'lucide-react';
+import Image from 'next/image';
+import { ChevronRight, Star, Shield, Gamepad2, Headphones, ExternalLink } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import ReferralLink from './ui/ReferralLink';
 
 const ReviewContent = ({ content }) => {
   // Parse the markdown-style content into structured data
@@ -54,6 +56,8 @@ const ReviewContent = ({ content }) => {
 };
 
 const CasinoReview = ({ review }) => {
+  const logoSrc = `/images/logos/${review.casino_name.toLowerCase().replace(/\s+/g, '-')}.png`;
+
   return (
     <Layout>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -70,18 +74,52 @@ const CasinoReview = ({ review }) => {
           <div className="lg:col-span-1">
             <Card className="sticky top-8">
               <CardHeader>
-                <CardTitle>Quick Links</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <Star className="h-5 w-5 text-brand-blue" />
+                  Quick Info
+                </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="space-y-6">
+                {/* Casino Logo */}
+                <div className="w-40 h-20 mx-auto bg-white rounded-lg p-2 flex items-center justify-center border border-gray-200">
+                  <Image
+                    src={logoSrc}
+                    alt={`${review.casino_name} logo`}
+                    width={160}
+                    height={80}
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+
+                {/* Welcome Bonus */}
+                {review.promotions?.sign_up_bonus && (
+                  <div>
+                    <h3 className="text-sm font-semibold text-gray-700 mb-2">Welcome Bonus</h3>
+                    <p className="text-sm text-gray-600">{review.promotions.sign_up_bonus}</p>
+                  </div>
+                )}
+
+                {/* Navigation Links */}
                 <nav className="space-y-2">
-                  <a 
-                    href={review.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full py-2 px-4 text-center bg-brand-blue hover:bg-brand-hover text-white rounded-lg transition-colors"
-                  >
-                    Visit Casino
-                  </a>
+                  {review.referral_link ? (
+                    <ReferralLink
+                      link={review.referral_link}
+                      className="block w-full py-2 px-4 text-center bg-brand-blue hover:bg-brand-hover text-white rounded-lg transition-colors flex items-center justify-center gap-2"
+                      trackingId={`review-${review.casino_name.toLowerCase()}`}
+                    >
+                      Play Now <ExternalLink className="h-4 w-4" />
+                    </ReferralLink>
+                  ) : (
+                    <a
+                      href={review.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full py-2 px-4 text-center bg-brand-blue hover:bg-brand-hover text-white rounded-lg transition-colors"
+                    >
+                      Visit Casino
+                    </a>
+                  )}
+                  
                   {['Bonuses', 'Games', 'Payments', 'Support'].map((item) => (
                     <a
                       key={item}

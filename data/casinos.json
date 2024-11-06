@@ -1,169 +1,177 @@
 [
-    {
-      "name": "Chumba Casino",
-      "url": "https://chumbacasino.com",
-      "promotions": {
-        "sign_up_bonus": "2,000,000 Gold Coins + 2 Sweeps Coins upon registration",
-        "daily_login_bonus": "Earn Gold Coins and Sweeps Coins daily on login",
-        "additional_bonus": "Special packages with boosted Sweeps Coins available"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x playthrough required to redeem SC",
-        "max_sweeps_exchange": "Max 10,000 SC per 24 hours"
-      },
-      "limits": {
-        "min_sweeps_balance": "50 SC required for redemption",
-        "regional_limitations": "Not available in Idaho and Washington"
-      },
-      "vip_program": "Yes, includes enhanced promotions for loyal players",
-      "referral_link": "[PLACEHOLDER]"
+  {
+    "name": "Crown Coins Casino",
+    "slug": "crown-coins",
+    "url": "https://crowncoinscasino.com",
+    "promotions": {
+      "sign_up_bonus": "75,000 GC + 15 SC for first-time users",
+      "purchase_bonus": "Get extra Sweeps Coins with select Gold Coin purchases"
     },
-    {
-      "name": "Sportzino Casino",
-      "url": "https://sportzino.com",
-      "promotions": {
-        "sign_up_bonus": "10,000 GC + 5 SC upon sign-up and first verification",
-        "daily_login_bonus": "Daily bonus Gold Coins for regular users",
-        "additional_bonus": "Special sports-themed promos and seasonal offers"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x playthrough requirement for SC",
-        "max_daily_redemption": "Limit of 5,000 SC per redemption session"
-      },
-      "limits": {
-        "min_sweeps_balance": "50 SC for eligible prize redemptions",
-        "regional_limitations": "Unavailable in certain U.S. states"
-      },
-      "vip_program": "Yes, with extra benefits for VIP users",
-      "referral_link": "[PLACEHOLDER]"
+    "wager_requirements": {
+      "sweeps_playthrough": "1x SC requirement for prize exchange",
+      "max_redemption_limit": "6,000 SC per redemption per 48 hours"
     },
-    {
-      "name": "Crown Coins Casino",
-      "url": "https://crowncoinscasino.com",
-      "promotions": {
-        "sign_up_bonus": "75,000 GC + 15 SC for first-time users",
-        "purchase_bonus": "Get extra Sweeps Coins with select Gold Coin purchases"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x SC requirement for prize exchange",
-        "max_redemption_limit": "6,000 SC per redemption per 48 hours"
-      },
-      "limits": {
-        "min_sweeps_balance": "40 SC needed for prize eligibility",
-        "regional_limitations": "Unavailable in specific states per terms"
-      },
-      "vip_program": "VIP program offers special deals for frequent players",
-      "referral_link": "[PLACEHOLDER]"
+    "limits": {
+      "min_sweeps_balance": "40 SC needed for prize eligibility",
+      "regional_limitations": "Unavailable in specific states per terms"
     },
-    {
-      "name": "Zula Casino",
-      "url": "https://zulacasino.com",
-      "promotions": {
-        "sign_up_bonus": "100,000 GC + 10 SC for sign-up and phone verification",
-        "daily_login_bonus": "10,000 GC + 1 SC",
-        "additional_bonus": "Purchase bonus with 250,000 GC + 10 SC for $2.99 for new players"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x playthrough to exchange SC for prizes",
-        "max_recompensating": "5,000 SC every 2 days"
-      },
-      "limits": {
-        "min_sweeps_balance": "50 SC for prize exchange",
-        "regional_limitations": "No real-value gameplay in Idaho, Michigan, Washington, Georgia"
-      },
-      "vip_program": "Offers extra bonuses through a VIP program",
-      "referral_link": "[PLACEHOLDER]"
+    "vip_program": "VIP program offers special deals for frequent players",
+    "referral_link": "https://crowncoinscasino.com/?ref=promoplay"
+  },
+  {
+    "name": "Luckland Slots",
+    "slug": "luckland-slots",
+    "url": "https://lucklandslots.com",
+    "promotions": {
+      "sign_up_bonus": "200,000 GC and 15 SC",
+      "daily_bonus": "Daily bonuses on login"
     },
-    {
-      "name": "McLuck Casino",
-      "url": "https://mcluck.com",
-      "promotions": {
-        "sign_up_bonus": "500,000 Gold Coins + 20 Sweeps Coins upon registration",
-        "purchase_bonus": "Special Gold Coins and SC packages with varying rates"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x to qualify for prize exchange",
-        "daily_play_limits": "Limited to certain max daily SC exchange values in specific states"
-      },
-      "limits": {
-        "min_sweeps_balance": "40 SC to redeem prizes",
-        "regional_limitations": "Not available in Washington, Idaho, Nevada"
-      },
-      "vip_program": "Offers exclusive bonuses and tailored promotions for VIPs",
-      "referral_link": "[PLACEHOLDER]"
+    "wager_requirements": {
+      "sweeps_playthrough": "1x requirement",
+      "max_redemption": "Limit on sweeps redemption per 48 hours"
     },
-    {
-      "name": "SunSpin Casino",
-      "url": "https://sunspin.us",
-      "promotions": {
-        "sign_up_bonus": "100,000 Gold Coins + 15 Sweeps Coins for new users",
-        "daily_bonus": "Earn daily login bonuses with GC and SC",
-        "special_event_bonus": "Additional SC and GC bonuses during seasonal promotions"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x SC for prize exchange eligibility",
-        "max_sweeps_exchange": "3,000 SC limit per redemption transaction"
-      },
-      "limits": {
-        "min_sweeps_balance": "45 SC for prize redemption",
-        "regional_limitations": "Not available in specific regions per site terms"
-      },
-      "vip_program": "Loyalty program available with increased rewards for regular players",
-      "referral_link": "[PLACEHOLDER]"
+    "limits": {
+      "min_sweeps_balance": "50 SC for prize exchanges",
+      "regional_limitations": "Unavailable in select U.S. states"
     },
-    {
-      "name": "Zoot Casino",
-      "url": "https://getzoot.us",
-      "promotions": {
-        "sign_up_bonus": "80,000 Gold Coins + 12 Sweeps Coins for sign-up",
-        "first_purchase_bonus": "Additional Sweeps Coins with the first purchase of GC packs"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x before redeeming SC",
-        "max_daily_sweeps_exchange": "4,000 SC per day limit"
-      },
-      "limits": {
-        "min_sweeps_balance": "35 SC required for prize exchange",
-        "regional_limitations": "Unavailable in certain states like Nevada"
-      },
-      "vip_program": "Available with loyalty rewards",
-      "referral_link": "[PLACEHOLDER]"
+    "vip_program": "VIP promotions for high-tier members",
+    "referral_link": "https://lucklandslots.com/?ref=promoplay"
+  },
+  {
+    "name": "McLuck Casino",
+    "slug": "mcluck",
+    "url": "https://mcluck.com",
+    "promotions": {
+      "sign_up_bonus": "500,000 Gold Coins + 20 Sweeps Coins upon registration",
+      "purchase_bonus": "Special Gold Coins and SC packages with varying rates"
     },
-    {
-      "name": "Smiles Casino",
-      "url": "https://smilescasino.com",
-      "promotions": {
-        "sign_up_bonus": "75,000 GC + 10 SC for registration",
-        "daily_rewards": "Daily login bonuses and seasonal GC packages"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x before SC redemption",
-        "max_daily_redemption": "5,000 SC limit"
-      },
-      "limits": {
-        "min_sweeps_balance": "40 SC needed for exchanges",
-        "regional_limitations": "Restrictions based on regional laws in specific states"
-      },
-      "vip_program": "Yes, includes exclusive promotions and rewards",
-      "referral_link": "[PLACEHOLDER]"
+    "wager_requirements": {
+      "sweeps_playthrough": "1x to qualify for prize exchange",
+      "daily_play_limits": "Limited to certain max daily SC exchange values in specific states"
     },
-    {
-      "name": "Luckland Slots",
-      "url": "https://lucklandslots.com",
-      "promotions": {
-        "sign_up_bonus": "200,000 GC and 15 SC",
-        "daily_bonus": "Daily bonuses on login"
-      },
-      "wager_requirements": {
-        "sweeps_playthrough": "1x requirement",
-        "max_redemption": "Limit on sweeps redemption per 48 hours"
-      },
-      "limits": {
-        "min_sweeps_balance": "50 SC for prize exchanges",
-        "regional_limitations": "Unavailable in select U.S. states"
-      },
-      "vip_program": "VIP promotions for high-tier members",
-      "referral_link": "[PLACEHOLDER]"
-    }
-  ]
-  
+    "limits": {
+      "min_sweeps_balance": "40 SC to redeem prizes",
+      "regional_limitations": "Not available in Washington, Idaho, Nevada"
+    },
+    "vip_program": "Offers exclusive bonuses and tailored promotions for VIPs",
+    "referral_link": "https://www.mcluck.com/?r=1359350864"
+  },
+  {
+    "name": "Smiles Casino",
+    "slug": "smiles",
+    "url": "https://smilescasino.com",
+    "promotions": {
+      "sign_up_bonus": "75,000 GC + 10 SC for registration",
+      "daily_rewards": "Daily login bonuses and seasonal GC packages"
+    },
+    "wager_requirements": {
+      "sweeps_playthrough": "1x before SC redemption",
+      "max_daily_redemption": "5,000 SC limit"
+    },
+    "limits": {
+      "min_sweeps_balance": "40 SC needed for exchanges",
+      "regional_limitations": "Restrictions based on regional laws in specific states"
+    },
+    "vip_program": "Yes, includes exclusive promotions and rewards",
+    "referral_link": "https://smilescasino.com/?ref=promoplay"
+  },
+  {
+    "name": "Sportzino Casino",
+    "slug": "sportzino",
+    "url": "https://sportzino.com",
+    "promotions": {
+      "sign_up_bonus": "10,000 GC + 5 SC upon sign-up and first verification",
+      "daily_login_bonus": "Daily bonus Gold Coins for regular users",
+      "additional_bonus": "Special sports-themed promos and seasonal offers"
+    },
+    "wager_requirements": {
+      "sweeps_playthrough": "1x playthrough requirement for SC",
+      "max_daily_redemption": "Limit of 5,000 SC per redemption session"
+    },
+    "limits": {
+      "min_sweeps_balance": "50 SC for eligible prize redemptions",
+      "regional_limitations": "Unavailable in certain U.S. states"
+    },
+    "vip_program": "Yes, with extra benefits for VIP users",
+    "referral_link": "https://sportzino.com/signup/d8d4f794-a99c-42a5-8ce0-7c56ead1d036"
+  },
+  {
+    "name": "SunSpin Casino",
+    "slug": "sunspin",
+    "url": "https://sunspin.us",
+    "promotions": {
+      "sign_up_bonus": "100,000 Gold Coins + 15 Sweeps Coins for new users",
+      "daily_bonus": "Earn daily login bonuses with GC and SC",
+      "special_event_bonus": "Additional SC and GC bonuses during seasonal promotions"
+    },
+    "wager_requirements": {
+      "sweeps_playthrough": "1x SC for prize exchange eligibility",
+      "max_sweeps_exchange": "3,000 SC limit per redemption transaction"
+    },
+    "limits": {
+      "min_sweeps_balance": "45 SC for prize redemption",
+      "regional_limitations": "Not available in specific regions per site terms"
+    },
+    "vip_program": "Loyalty program available with increased rewards for regular players",
+    "referral_link": "https://www.sunspin.us/sign-up?referral=c86c894a-49ec-4830-800b-50eceea5b124"
+  },
+  {
+    "name": "Zoot Casino",
+    "slug": "zoot",
+    "url": "https://getzoot.us",
+    "promotions": {
+      "sign_up_bonus": "80,000 Gold Coins + 12 Sweeps Coins for sign-up",
+      "first_purchase_bonus": "Additional Sweeps Coins with the first purchase of GC packs"
+    },
+    "wager_requirements": {
+      "sweeps_playthrough": "1x before redeeming SC",
+      "max_daily_sweeps_exchange": "4,000 SC per day limit"
+    },
+    "limits": {
+      "min_sweeps_balance": "35 SC required for prize exchange",
+      "regional_limitations": "Unavailable in certain states like Nevada"
+    },
+    "vip_program": "Available with loyalty rewards",
+    "referral_link": "https://getzoot.us/?referralCode=ZOOTwithMEATYBETZ"
+  },
+  {
+    "name": "Zula Casino",
+    "slug": "zula",
+    "url": "https://zulacasino.com",
+    "promotions": {
+      "sign_up_bonus": "100,000 GC + 10 SC for sign-up and phone verification",
+      "daily_login_bonus": "10,000 GC + 1 SC",
+      "additional_bonus": "Purchase bonus with 250,000 GC + 10 SC for $2.99 for new players"
+    },
+    "wager_requirements": {
+      "sweeps_playthrough": "1x playthrough to exchange SC for prizes",
+      "max_recompensating": "5,000 SC every 2 days"
+    },
+    "limits": {
+      "min_sweeps_balance": "50 SC for prize exchange",
+      "regional_limitations": "No real-value gameplay in Idaho, Michigan, Washington, Georgia"
+    },
+    "vip_program": "Offers extra bonuses through a VIP program",
+    "referral_link": "https://zulacasino.com/?ref=promoplay"
+  },
+  {
+    "name": "Pulsz Casino",
+    "slug": "pulsz",
+    "url": "https://pulsz.com",
+    "promotions": {
+      "sign_up_bonus": "2.3 FREE Sweepstakes Coins + 38,250 Gold Coins on signup",
+      "daily_login_bonus": "Daily rewards for regular players",
+      "additional_bonus": "Purchase $19.99 package: Get 200,000 Gold Coins + 30 FREE Sweepstakes Coins"
+    },
+    "wager_requirements": {
+      "sweeps_playthrough": "1x playthrough requirement for SC redemption",
+      "max_redemption_limit": "5,000 SC per redemption"
+    },
+    "limits": {
+      "min_sweeps_balance": "50 SC for prize redemption",
+      "regional_limitations": "Not available in ID, NV, WA and select other states"
+    },
+    "vip_program": "Premium rewards and exclusive promotions for regular players",
+    "referral_link": "https://pulsz.com/?invited_by=9sdvyj"
+  }
+]

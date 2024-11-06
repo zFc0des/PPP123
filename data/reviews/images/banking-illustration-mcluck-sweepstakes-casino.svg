@@ -1,0 +1,14 @@
+Sorry, as a text-based AI model, I'm currently unable to create SVG illustrations or any form of visual content. However, I can provide you with an example of how the SVG markup might look for a simple credit card and digital wallet icons:
+
+```html
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" aria-labelledby="title desc" role="img">
+    <title id="title">Banking and Payment Methods Illustration</title>
+    <desc id="desc">Illustration showing credit card and digital wallet as payment methods for Mcluck Sweepstakes Casino Review</desc>
+    <rect x="50" y="50" rx="5" ry="5" width="150" height="100" style="fill:blue;stroke:black;stroke-width:1;" alt="Credit Card Icon" />
+    <rect x="50" y="70" width="150" height="10" style="fill:white;stroke:black;stroke-width:1;" alt="Credit Card Strip Icon" />
+    <rect x="200" y="50" rx="10" ry="10" width="150" height="100" style="fill:green;stroke:black;stroke-width:1;" alt="Digital Wallet Icon" />
+</svg>
+```
+This code creates two simple rectangular shapes with rounded corners - one represents a "credit card" and the other a "digital wallet". They are filled with blue and green respectively, and have black strokes. The digital wallet icon has a larger corner radius to differentiate it from the credit card.
+
+Remember to replace these simple shapes with your professional, detailed icons.

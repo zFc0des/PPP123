@@ -1,10 +1,27 @@
 import { useState } from 'react';
-import Image from 'next/image';
+import CasinoLogo from './ui/CasinoLogo';
+import ReferralLink from './ui/card/ReferralLink';
 
 const PromotionCard = ({ casino }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   
   const logoSrc = `/images/logos/${casino.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+
+  const handleCasinoClick = () => {
+    // Use referral link if available, otherwise use regular URL
+    const destinationUrl = casino.referral_link || casino.url;
+    
+    // Basic analytics tracking
+    if (window.gtag) {
+      window.gtag('event', 'casino_click', {
+        casino_name: casino.name,
+        link_type: casino.referral_link ? 'referral' : 'direct',
+        timestamp: new Date().toISOString()
+      });
+    }
+    
+    window.open(destinationUrl, '_blank');
+  };
 
   return (
     <div className="bg-white rounded-lg shadow-md border border-gray-200 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -14,12 +31,11 @@ const PromotionCard = ({ casino }) => {
       
       <div className="p-6">
         <div className="w-32 h-16 mx-auto mb-4 bg-white rounded-lg p-2 flex items-center justify-center border border-gray-200">
-          <Image
-            src={logoSrc}
-            alt={`${casino.name} logo`}
-            width={120}
-            height={60}
-            className="object-contain w-full h-full"
+          <CasinoLogo
+            casinoSlug={casino.slug}
+            width={32}  
+            height={32}
+            className="rounded-full object-cover"
           />
         </div>
         
@@ -81,12 +97,13 @@ const PromotionCard = ({ casino }) => {
           >
             {isExpanded ? 'Show Less' : 'View More'}
           </button>
-          <button 
-            onClick={() => window.open(casino.url, '_blank')}
-            className="w-full px-4 py-2 bg-brand-blue text-white rounded-lg text-sm font-medium hover:bg-brand-hover transition-colors uppercase"
+          <ReferralLink
+            casino={casino}
+            className="w-full px-4 py-2 bg-brand-blue text-white rounded-lg text-sm font-medium hover:bg-brand-hover transition-colors flex items-center justify-center gap-2"
+            trackingId={`promo-${casino.slug}`}
           >
             CASINO SIGN-UP!
-          </button>
+          </ReferralLink>
         </div>
       </div>
     </div>

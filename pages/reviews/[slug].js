@@ -1,4 +1,3 @@
-// pages/reviews/[slug].js
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import Link from 'next/link';
@@ -15,9 +14,17 @@ const parseReviewContent = (content) => {
       const lines = section.split('\n').filter(Boolean);
       const titleLine = lines[0];
       const level = titleLine.startsWith('1:') ? 'H1' : 'H2';
-      const title = titleLine.replace(/[12]:/, '').trim();
+      // Clean up the title by removing level prefix and any trailing asterisks
+      const title = titleLine
+        .replace(/[12]:/, '')
+        .replace(/\*\*$/, '')
+        .replace(/\*\*/g, '')
+        .trim();
       const content = lines.slice(1).join('\n').trim();
-      const id = title.toLowerCase().replace(/\s+/g, '-');
+      const id = title
+        .toLowerCase()
+        .replace(/\*\*/g, '')
+        .replace(/\s+/g, '-');
       
       return { level, title, content, id };
     });
@@ -129,6 +136,7 @@ const ReviewPage = ({ reviewData }) => {
   );
 };
 
+// Keep existing getStaticPaths and getStaticProps
 export async function getStaticPaths() {
   const reviewsDirectory = path.join(process.cwd(), 'data', 'reviews');
   const fileNames = fs.readdirSync(reviewsDirectory);

@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import Layout from '../components/Layout';
 import { BookOpen, Star, Search } from 'lucide-react';
 import path from 'path';
-
+import fs from 'fs';
+import Link from 'next/link';
+import ReviewCard from '../components/ReviewCard';
 
 // Sample blog posts data - replace with your actual data source later
 const blogPosts = [
@@ -35,11 +37,18 @@ const parseReviewContent = (content) => {
 
   sections.forEach(section => {
     if (section.startsWith('H1:')) {
-      parsedContent.title = section.split('\n')[0].replace('H1:', '').trim();
+      parsedContent.title = section
+        .split('\n')[0]
+        .replace('H1:', '')
+        .replace(/\*\*/g, '')  // Remove any asterisks
+        .trim();
     } else if (section.startsWith('H2:')) {
       const [heading, ...contentParts] = section.split('\n');
       parsedContent.sections.push({
-        title: heading.replace('H2:', '').trim(),
+        title: heading
+          .replace('H2:', '')
+          .replace(/\*\*/g, '')  // Remove any asterisks
+          .trim(),
         content: contentParts.join('\n').trim()
       });
     }
@@ -69,7 +78,7 @@ const ContentCard = ({ type, data }) => {
           <div className="space-y-2">
             {parsedReview.sections.slice(0, 2).map((section, index) => (
               <div key={index} className="text-sm text-gray-500">
-                • {section.title.split(':')[0]}
+                • {section.title.split(':')[0].replace(/\*\*/g, '')}
               </div>
             ))}
           </div>
@@ -267,27 +276,37 @@ const Reviews = ({ reviewsData }) => {
 };
 
 export async function getStaticProps() {
-  const fs = require('fs');
   try {
-    const reviewsDirectory = path.join(process.cwd(), 'reviews');
-    const fileContents = fs.readFileSync(
-      path.join(reviewsDirectory, 'chumba_casino_review.json'), 
-      'utf8'
-    );
-
-    // Remove the import of casinoData at the top of the file
-    // The data should now come from the JSON file
-
-    const reviewsData = [JSON.parse(fileContents)];
-    console.log('Loaded review data:', reviewsData); // Debug log
+    const reviewsDirectory = path.join(process.cwd(), 'data', 'reviews');
+    const fileNames = fs.readdirSync(reviewsDirectory);
+    
+    // Load each review file
+    const reviewsData = fileNames
+      .map(filename => {
+        try {
+          const filePath = path.join(reviewsDirectory, filename);
+          const fileContents = fs.readFileSync(filePath, 'utf8');
+          return JSON.parse(fileContents);
+        } catch (error) {
+          console.error(`Error reading file ${filename}:`, error);
+          return null;
+        }
+      })
+      .filter(Boolean); // Remove any failed reads
 
     return {
-      props: { reviewsData },
+      props: {
+        reviewsData
+      },
       revalidate: 3600
     };
   } catch (error) {
     console.error('Error loading reviews:', error);
-    return { props: { reviewsData: [] } };
+    return {
+      props: {
+        reviewsData: []
+      }
+    };
   }
 }
   

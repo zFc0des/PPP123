@@ -4,6 +4,8 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
+from typing import Dict, List
+import re
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_ROOT = Path(os.getcwd())  # or use BASE_DIR if you prefer
@@ -23,6 +25,7 @@ class ReviewGenerator:
         
         # Create the reviews directory if it doesn't exist
         REVIEW_OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+        (REVIEW_OUTPUT_DIR / 'images').mkdir(parents=True, exist_ok=True)
 
     def generate_casino_details(self, casino_name):
         """Generate detailed casino information using GPT-4"""
@@ -62,6 +65,93 @@ class ReviewGenerator:
                 "languages": ["English"],
                 "currencies": ["USD"]
             }
+
+    def generate_section_images(self, casino_name: str, sections: List[str]) -> Dict[str, str]:
+        """Generate SVG illustrations for each review section"""
+        section_images = {}
+        
+        section_specs = {
+            "Bonuses and Promotions": {
+                "description": "Create an SVG illustration for casino bonuses and promotions. Include icons for coins, gift boxes, and reward symbols. Use blue and gold colors.",
+                "filename": "bonuses-illustration"
+            },
+            "Game Selection and Variety": {
+                "description": "Create an SVG illustration representing casino game variety. Include symbols for slots, cards, and dice. Use vibrant colors.",
+                "filename": "games-illustration"
+            },
+            "User Experience and Interface": {
+                "description": "Create an SVG illustration for user interface elements. Show mobile devices and navigation symbols. Use clean, modern style.",
+                "filename": "interface-illustration"
+            },
+            "Banking and Payment Methods": {
+                "description": "Create an SVG illustration for payment methods. Include credit card and digital wallet symbols. Use secure, professional style.",
+                "filename": "banking-illustration"
+            },
+            "Security and Licensing": {
+                "description": "Create an SVG illustration for casino security. Include shield, lock, and certification symbols. Use trustworthy blue tones.",
+                "filename": "security-illustration"
+            },
+            "Customer Support Services": {
+                "description": "Create an SVG illustration for customer support. Show chat bubbles and support agent symbols. Use friendly, approachable style.",
+                "filename": "support-illustration"
+            }
+        }
+
+        try:
+            for section, spec in section_specs.items():
+                prompt = f"""
+                Create an SEO-optimized SVG illustration for {casino_name}'s {section} section.
+                
+                Requirements:
+                - Modern, professional style
+                - Relevant icons and symbols
+                - {spec['description']}
+                - Viewbox: 0 0 400 300
+                - Include proper ARIA labels and titles
+                - Use semantic SVG elements
+                - Include alt text
+                
+                Respond with valid SVG markup only.
+                """
+
+                response = openai.ChatCompletion.create(
+                    model="gpt-4",
+                    messages=[{"role": "user", "content": prompt}],
+                    temperature=0.7
+                )
+
+                svg_content = response.choices[0].message.content.strip()
+                svg_content = self._clean_svg(svg_content)
+                
+                filename = f"{spec['filename']}-{self._sanitize_filename(casino_name)}.svg"
+                filepath = REVIEW_OUTPUT_DIR / 'images' / filename
+                
+                with open(filepath, 'w', encoding='utf-8') as f:
+                    f.write(svg_content)
+                
+                section_images[section] = f"/images/reviews/{filename}"
+
+            return section_images
+
+        except Exception as e:
+            print(f"Error generating section images: {e}")
+            return {}
+
+    def _clean_svg(self, svg_content: str) -> str:
+        """Clean and validate SVG content"""
+        svg_content = re.sub(r'<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>', '', svg_content)
+        
+        if 'xmlns=' not in svg_content:
+            svg_content = svg_content.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"')
+        
+        if 'aria-labelledby=' not in svg_content:
+            svg_content = svg_content.replace('<svg', '<svg aria-labelledby="title desc"')
+        
+        return svg_content
+
+    def _sanitize_filename(self, filename: str) -> str:
+        """Sanitize filename for safe saving"""
+        return re.sub(r'[^\w\-_.]', '-', filename.lower().replace(' review', ''))
 
     def generate_ratings(self, content):
         """Generate ratings based on review content"""
@@ -166,21 +256,45 @@ class ReviewGenerator:
             print(f"Error generating main content: {e}")
             return ""
 
+    def _extract_meta_description(self, content):
+        """Extract or generate meta description"""
+        try:
+            prompt = f"""
+            Create a compelling meta description (max 160 characters) for this casino review:
+            {content[:500]}...
+            """
+            
+            response = openai.ChatCompletion.create(
+                model="gpt-4",
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.7
+            )
+            return response.choices[0].message.content[:160]
+        except Exception as e:
+            print(f"Error generating meta description: {e}")
+            return ""
+
     def generate_review(self, casino_name, casino_url, keywords):
         """Generate comprehensive casino review"""
         try:
-            # Generate main review content
             content = self._generate_main_content(casino_name, casino_url, keywords)
             
             if not content:
                 raise ValueError("Failed to generate review content")
 
-            # Generate additional components
+            section_images = self.generate_section_images(casino_name, [
+                "Bonuses and Promotions",
+                "Game Selection and Variety",
+                "User Experience and Interface",
+                "Banking and Payment Methods",
+                "Security and Licensing",
+                "Customer Support Services"
+            ])
+
             casino_details = self.generate_casino_details(casino_name)
             ratings = self.generate_ratings(content)
             pros_cons = self.extract_pros_cons(content)
             
-            # Create complete review data structure
             review_data = {
                 "casino_name": casino_name,
                 "url": casino_url,
@@ -200,39 +314,25 @@ class ReviewGenerator:
                     "Customer Support Services",
                     "Final Verdict"
                 ],
+                "section_images": section_images,
                 "seo": {
                     "title": f"{casino_name}: Comprehensive Review & Rating",
                     "meta_description": self._extract_meta_description(content),
                     "focus_keywords": keywords[:3],
-                    "schema_type": "Review"
+                    "schema_type": "Review",
+                    "image_alt_texts": {
+                        section: f"{casino_name} {section.lower()} illustration"
+                        for section in section_images.keys()
+                    }
                 }
             }
             
-            # Save review to file
             self._save_review(review_data, casino_name)
             return review_data
             
         except Exception as e:
             print(f"Error generating review: {e}")
             return None
-
-    def _extract_meta_description(self, content):
-        """Extract or generate meta description"""
-        try:
-            prompt = f"""
-            Create a compelling meta description (max 160 characters) for this casino review:
-            {content[:500]}...
-            """
-            
-            response = openai.ChatCompletion.create(
-                model="gpt-4",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.7
-            )
-            return response.choices[0].message.content[:160]
-        except Exception as e:
-            print(f"Error generating meta description: {e}")
-            return ""
 
     def _save_review(self, review_data, casino_name):
         """Save review data to JSON file"""
@@ -248,11 +348,10 @@ def main():
     try:
         generator = ReviewGenerator()
         
-        # Example casino data - you can modify this or load from a configuration file
         casinos_to_review = [
             {
-                "name": "Pulsz Casino Review",
-                "url": "https://pulsz.com",
+                "name": "Mcluck Sweepstakes Casino Review",
+                "url": "https://mcluck.com",
                 "keywords": [
                     "sweepstakes casino",
                     "social casino",
@@ -260,7 +359,6 @@ def main():
                     "casino bonuses"
                 ]
             }
-            # Add more casinos here as needed
         ]
 
         for casino in casinos_to_review:

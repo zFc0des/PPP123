@@ -1,3 +1,4 @@
+// In your index.js - Current imports
 import React from 'react';
 import Layout from '../components/Layout';
 import FeaturedDashboard from '../components/FeaturedDashboard';
@@ -5,6 +6,7 @@ import { ChevronRight, Star, Award, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import path from 'path';
 import fs from 'fs';
+import ReviewCard from '../components/ReviewCard';  // <- You import this but don't use it
 
 export default function Home({ latestReviews, casinoData, promotions, blogPosts }) {
   return (
@@ -121,40 +123,52 @@ export default function Home({ latestReviews, casinoData, promotions, blogPosts 
   );
 }
 
+// pages/index.js
 export async function getStaticProps() {
   try {
     // Load casino data
     const casinoData = require('../data/casinos.json');
-
-    // Load reviews
-    const reviewsDirectory = path.join(process.env.REVIEW_DATA_PATH || 'data/reviews');
-    const reviewFiles = fs.readdirSync(reviewsDirectory);
+    
+    const reviewsDirectory = path.join(process.cwd(), 'data', 'reviews');
+    const fileNames = fs.readdirSync(reviewsDirectory);
+    
+    // Filter out the 'images' directory and non-JSON files
+    const reviewFiles = fileNames.filter(filename => 
+      filename.endsWith('.json') && filename !== 'images'
+    );
+    
+    // Load each review file
     const latestReviews = reviewFiles
       .map(filename => {
-        const filePath = path.join(reviewsDirectory, filename);
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        return JSON.parse(fileContent);
+        try {
+          const filePath = path.join(reviewsDirectory, filename);
+          const fileContents = fs.readFileSync(filePath, 'utf8');
+          return JSON.parse(fileContents);
+        } catch (error) {
+          console.error(`Error reading file ${filename}:`, error);
+          return null;
+        }
       })
+      .filter(Boolean)
       .slice(0, 3); // Get latest 3 reviews
 
-    // Sample promotions data
+    // Sample data for other sections
     const promotions = [
       {
         id: 1,
-        casino_name: "Chumba Casino",
+        casino_name: "Example Casino",
         title: "Welcome Bonus",
-        description: "Get 2 million Gold Coins + 2 Sweeps Coins on signup!"
-      },
+        description: "Get started with our welcome bonus"
+      }
     ];
 
-    // Sample blog posts data
     const blogPosts = [
       {
         id: 1,
-        title: "Understanding Sweepstakes Casinos",
-        excerpt: "Learn everything you need to know about how sweepstakes casinos work...",
+        title: "Getting Started",
+        excerpt: "Learn how to get started...",
         readTime: "5 min read"
-      },
+      }
     ];
 
     return {
